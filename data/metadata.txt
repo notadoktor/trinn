@@ -1,0 +1,2 @@
+INIT_GaitDB_sample.zip	https://www.vision.uji.es/gaitDB/
+http://www.clinicalgaitanalysis.com/data/
