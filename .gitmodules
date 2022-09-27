@@ -1,3 +1,3 @@
 [submodule "proto"]
-	path = lib/proto
+	path = lib/proto/flipper
 	url = https://github.com/flipperdevices/flipperzero-protobuf

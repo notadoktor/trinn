@@ -1,2 +1,4 @@
 INIT_GaitDB_sample.zip	https://www.vision.uji.es/gaitDB/
 http://www.clinicalgaitanalysis.com/data/
+
+7BB_41_2L0-792688.pdf	https://no.mouser.com/datasheet/2/281/7BB_41_2L0-792688.pdf
