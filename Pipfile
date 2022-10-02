@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+protobuf = "*"
+pyserial = "*"
+typer = "*"
+types-protobuf = "*"
+
+[dev-packages]
+black = "*"
+ipython = "*"
+pdbpp = "*"
+
+[requires]
+python_version = "3.10"
+
+[scripts]
+trinn = "python3 ./src/trinn/main.py"
+init-help = "python3 ./scripts/gen_stubs.py"
+i = "ipython"
