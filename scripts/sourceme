@@ -1,0 +1,8 @@
+# shellcheck shell=bash
+
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")"/.. && pwd)"
+export REPO_ROOT
+
+export PROTO_SRC="$REPO_ROOT/lib/proto/flipper"
+export PROTO_OUT="$REPO_ROOT/src/trinn/sensors/flipper"
+export PYTHONPATH="$REPO_ROOT/src:$PYTHONPATH"
