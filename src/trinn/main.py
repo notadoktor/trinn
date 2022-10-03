@@ -8,8 +8,7 @@ from util import print_hex, print_screen
 
 def main(path: str = "/dev/ttyACM0"):
     client = Client(path)
-    print_screen(bytes(client.snapshot_screen()))
-    client.send_input("SHORT LEFT")
+    print_screen(client.snapshot_screen())
 
     embed(colors="neutral")
 

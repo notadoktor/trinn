@@ -1,5 +1,6 @@
 from google.protobuf.descriptor import FieldDescriptor
 
+
 FIELD_TYPES = {
     FieldDescriptor.TYPE_DOUBLE: "float",
     FieldDescriptor.TYPE_FLOAT: "float",

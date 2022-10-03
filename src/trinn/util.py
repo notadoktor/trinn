@@ -1,3 +1,18 @@
+
+def cc_to_snake(name: str) -> str:
+    new_name = ""
+    for i in range(len(name)):
+        if i > 0 and name[i].isupper():
+            if name[i - 1].islower():
+                new_name += "_"
+            elif i < len(name) - 1 and name[i + 1].islower():
+                new_name += "_"
+        new_name += name[i].lower()
+    return new_name
+
+def snake_to_cc(name: str) -> str:
+    return name.replace("_"," ").title().replace(" ","")
+
 def print_hex(data: bytes):
     print("".join("{:02x} ".format(x) for x in data))
 

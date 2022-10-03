@@ -4,18 +4,11 @@ from pathlib import Path
 from typing import ClassVar, overload
 
 from google.protobuf.internal.encoder import _VarintBytes  # type: ignore
-from google.protobuf.symbol_database import SymbolDatabase
+from google.protobuf.message import Message
 from serial import Serial
 
 from ..generic import GenericClient
-from . import flipper_pb2, gpio_pb2, gui_pb2, storage_pb2, system_pb2
-
-db = SymbolDatabase()
-db.RegisterFileDescriptor(flipper_pb2.DESCRIPTOR)
-db.RegisterFileDescriptor(gpio_pb2.DESCRIPTOR)
-db.RegisterFileDescriptor(gui_pb2.DESCRIPTOR)
-db.RegisterFileDescriptor(storage_pb2.DESCRIPTOR)
-db.RegisterFileDescriptor(system_pb2.DESCRIPTOR)
+from . import application_pb2, flipper_pb2, gpio_pb2, gui_pb2, storage_pb2, system_pb2
 
 
 class Varint32Exception(Exception):
@@ -31,7 +24,7 @@ class Client(GenericClient):
             raise FileNotFoundError(f"Device {dev} not found")
 
         self._serial = Serial(dev, baudrate=baudrate, timeout=1)
-        self._cmd_id: int = 0
+        self._cmd_id = 0
 
         if not lazy_connect:
             self.connect()
@@ -108,17 +101,24 @@ class Client(GenericClient):
         ...
 
     def _run(self, cmd: str, *, has_next: bool = False, get_response: bool = False, **kwargs):
-        cmd_data = db.GetSymbol("cmd")(**kwargs)
-        msg = db.GetSymbol("Main")(
+        # cmd_obj = _get_symbol(cmd)
+        # breakpoint()
+        cmd_data = _get_symbol(cmd)(**kwargs)
+        msg = self._new_msg(
             command_id=self._next_cmd_id(),
             has_next=has_next,
-            command_status=flipper_pb2.CommandStatus("OK"),
-            cmd=cmd_data,
+            command_status=flipper_pb2.CommandStatus.OK,
+            **{cmd: cmd_data},
         )
         msg_bytes = bytearray(_VarintBytes(msg.ByteSize()) + msg.SerializeToString())
         self._serial.write(msg_bytes)
         if get_response:
-            return self._read_answer(self._cmd_id)
+            return self._read_answer(0)
+
+    def _new_msg(self, **kwargs):
+        return flipper_pb2.Main(**kwargs)
+
+    ### Application commands
 
     def ping(self, data=bytes([0xDE, 0xAD, 0xBE, 0xEF])):
         """Ping flipper"""
@@ -128,25 +128,27 @@ class Client(GenericClient):
         """Start screen stream"""
         return self._run("gui_start_screen_stream_request", get_response=get_resp)
 
-    def stop_screen_stream(self, get_resp: bool = True):
+    def stop_screen_stream(self, get_resp: bool = False):
         """Stop screen stream"""
-        return self._run("gui_stop_screen_stream_request")
+        return self._run("gui_stop_screen_stream_request", get_response=get_resp)
 
     def snapshot_screen(self):
         """Snapshot screen"""
         data = self.start_screen_stream()
-        self.stop_screen_stream(False)
-        return data.gui_screen_frame  # data.gui_screen_frame.data
+        self.stop_screen_stream()
+        return data.gui_screen_frame.data
 
     def _send_input_event_request(
         self,
         input_key: gui_pb2.InputKey,
         input_type: gui_pb2.InputType,
+        *,
+        get_resp: bool = False,
     ):
         """Send Input Event Request Key"""
         return self._run(
             "gui_send_input_event_request",
-            get_response=True,
+            get_response=get_resp,
             key=input_key,
             type=input_type,
         )
@@ -156,12 +158,12 @@ class Client(GenericClient):
         input_type_str, input_key_str = key_type.split(" ")
 
         try:
-            input_type = gui_pb2.InputType(input_type_str)
+            input_type = getattr(gui_pb2.InputType, input_type_str)
         except ValueError:
             raise ValueError(f"Unknown input type: {input_type_str}")
 
         try:
-            input_key = gui_pb2.InputKey(input_key_str)
+            input_key = getattr(gui_pb2.InputKey, input_key_str)
         except ValueError:
             raise ValueError(f"Unknown input key: {input_key_str}")
 
@@ -169,43 +171,19 @@ class Client(GenericClient):
         self._send_input_event_request(input_key, input_type)
         self._send_input_event_request(input_key, gui_pb2.RELEASE)
 
-    def app_start(self, name, args):
-        """Start application"""
-        return self._run("app_start_request", get_response=True, name=name, args=args)
-
-    def app_exit(self):
-        """Send exit command to app"""
-        return self._run("app_exit_request", get_response=True)
-
-    def app_load_file(self, path):
-        """Send load file command to app"""
-        return self._run("app_load_file_request", get_response=True, path=path)
-
-    def app_button_press(self, args):
-        """Send button press command to app"""
-        return self._run("app_button_press_request", get_response=True, args=args)
-
-    def app_button_release(self):
-        """Send button release command to app"""
-        return self._run("app_button_release_request", get_response=True)
-
-    def cmd_flipper_stop_session(self):
-        """Stop RPC session"""
-        return self._run("stop_session", get_response=True)
-
-    def gpio_set_pin_mode(self, pin, mode):
+    def set_pin_mode(self, pin: gpio_pb2.GpioPin, mode: gpio_pb2.GpioPinMode):
         """Set GPIO pin mode"""
         return self._run("gpio_set_pin_mode_request", get_response=True, pin=pin, mode=mode)
 
-    def cmd_gpio_write_pin(self, pin, value):
+    def write_pin(self, pin: gpio_pb2.GpioPin, value: int):
         """Write GPIO pin"""
         return self._run("gpio_write_pin_request", get_response=True, pin=pin, value=value)
 
-    def cmd_gpio_read_pin(self, pin):
+    def read_pin(self, pin: gpio_pb2.GpioPin):
         """Read GPIO pin"""
         return self._run("gpio_read_pin_request", get_response=True, pin=pin)
 
-    def cmd_gpio_set_input_pull(self, pin, pull_mode):
+    def set_input_pull(self, pin: gpio_pb2.GpioPin, pull_mode: gpio_pb2.GpioInputPull):
         """Set GPIO input pull"""
         return self._run(
             "gpio_set_input_pull_request",
@@ -219,3 +197,10 @@ class Client(GenericClient):
 
     def poll(self, interval):
         pass
+
+
+def _get_symbol(name: str) -> type[Message]:
+    msg = flipper_pb2.Main.DESCRIPTOR.fields_by_name[name].message_type
+    pkg, name = msg.full_name.split(".", 1)
+    mod_name = pkg.split("_", 1)[-1].lower() + "_pb2"
+    return getattr(globals()[mod_name], name)
