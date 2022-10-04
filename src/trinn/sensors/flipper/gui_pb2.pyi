@@ -10,6 +10,7 @@ from typing import Literal
 import google.protobuf.descriptor
 import google.protobuf.message
 import google.protobuf.symbol_database
+
 import trinn.sensors.flipper.gui_pb2
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
@@ -19,8 +20,8 @@ class ScreenFrame(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     DATA_FIELD_NUMBER: int
     data: bytes
-    def __init__(self, *, data: bytes=...) -> None: ...
-    def ClearField(self, field_name: Literal['data']) -> None: ...
+    def __init__(self, *, data: bytes = ...) -> None: ...
+    def ClearField(self, field_name: Literal["data"]) -> None: ...
 
 class StartScreenStreamRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -36,15 +37,15 @@ class SendInputEventRequest(google.protobuf.message.Message):
     TYPE_FIELD_NUMBER: int
     key: InputKey
     type: InputType
-    def __init__(self, *, key: InputKey=..., type: InputType=...) -> None: ...
-    def ClearField(self, field_name: Literal['key', 'type']) -> None: ...
+    def __init__(self, *, key: InputKey = ..., type: InputType = ...) -> None: ...
+    def ClearField(self, field_name: Literal["key", "type"]) -> None: ...
 
 class StartVirtualDisplayRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     FIRST_FRAME_FIELD_NUMBER: int
     first_frame: trinn.sensors.flipper.gui_pb2.ScreenFrame
-    def __init__(self, *, first_frame: trinn.sensors.flipper.gui_pb2.ScreenFrame=...) -> None: ...
-    def ClearField(self, field_name: Literal['first_frame']) -> None: ...
+    def __init__(self, *, first_frame: trinn.sensors.flipper.gui_pb2.ScreenFrame = ...) -> None: ...
+    def ClearField(self, field_name: Literal["first_frame"]) -> None: ...
 
 class StopVirtualDisplayRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -57,6 +58,7 @@ class InputKey(IntEnum):
     LEFT = 3
     OK = 4
     BACK = 5
+
 UP = InputKey.UP
 DOWN = InputKey.DOWN
 RIGHT = InputKey.RIGHT
@@ -70,6 +72,7 @@ class InputType(IntEnum):
     SHORT = 2
     LONG = 3
     REPEAT = 4
+
 PRESS = InputType.PRESS
 RELEASE = InputType.RELEASE
 SHORT = InputType.SHORT

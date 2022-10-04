@@ -13,6 +13,7 @@ types-protobuf = "*"
 black = "*"
 ipython = "*"
 pdbpp = "*"
+isort = "*"
 
 [requires]
 python_version = "3.10"

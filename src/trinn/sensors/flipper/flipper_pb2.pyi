@@ -10,6 +10,7 @@ from typing import Literal
 import google.protobuf.descriptor
 import google.protobuf.message
 import google.protobuf.symbol_database
+
 import trinn.sensors.flipper.application_pb2
 import trinn.sensors.flipper.gpio_pb2
 import trinn.sensors.flipper.gui_pb2
@@ -145,8 +146,131 @@ class Main(google.protobuf.message.Message):
     gpio_read_pin_response: trinn.sensors.flipper.gpio_pb2.ReadPinResponse
     gpio_write_pin: trinn.sensors.flipper.gpio_pb2.WritePin
     app_state_response: trinn.sensors.flipper.application_pb2.AppStateResponse
-    def __init__(self, *, command_id: int=..., command_status: CommandStatus=..., has_next: bool=..., empty: Empty=..., stop_session: StopSession=..., system_ping_request: trinn.sensors.flipper.system_pb2.PingRequest=..., system_ping_response: trinn.sensors.flipper.system_pb2.PingResponse=..., system_reboot_request: trinn.sensors.flipper.system_pb2.RebootRequest=..., system_device_info_request: trinn.sensors.flipper.system_pb2.DeviceInfoRequest=..., system_device_info_response: trinn.sensors.flipper.system_pb2.DeviceInfoResponse=..., system_factory_reset_request: trinn.sensors.flipper.system_pb2.FactoryResetRequest=..., system_get_datetime_request: trinn.sensors.flipper.system_pb2.GetDateTimeRequest=..., system_get_datetime_response: trinn.sensors.flipper.system_pb2.GetDateTimeResponse=..., system_set_datetime_request: trinn.sensors.flipper.system_pb2.SetDateTimeRequest=..., system_play_audiovisual_alert_request: trinn.sensors.flipper.system_pb2.PlayAudiovisualAlertRequest=..., system_protobuf_version_request: trinn.sensors.flipper.system_pb2.ProtobufVersionRequest=..., system_protobuf_version_response: trinn.sensors.flipper.system_pb2.ProtobufVersionResponse=..., system_update_request: trinn.sensors.flipper.system_pb2.UpdateRequest=..., system_update_response: trinn.sensors.flipper.system_pb2.UpdateResponse=..., system_power_info_request: trinn.sensors.flipper.system_pb2.PowerInfoRequest=..., system_power_info_response: trinn.sensors.flipper.system_pb2.PowerInfoResponse=..., storage_info_request: trinn.sensors.flipper.storage_pb2.InfoRequest=..., storage_info_response: trinn.sensors.flipper.storage_pb2.InfoResponse=..., storage_stat_request: trinn.sensors.flipper.storage_pb2.StatRequest=..., storage_stat_response: trinn.sensors.flipper.storage_pb2.StatResponse=..., storage_list_request: trinn.sensors.flipper.storage_pb2.ListRequest=..., storage_list_response: trinn.sensors.flipper.storage_pb2.ListResponse=..., storage_read_request: trinn.sensors.flipper.storage_pb2.ReadRequest=..., storage_read_response: trinn.sensors.flipper.storage_pb2.ReadResponse=..., storage_write_request: trinn.sensors.flipper.storage_pb2.WriteRequest=..., storage_delete_request: trinn.sensors.flipper.storage_pb2.DeleteRequest=..., storage_mkdir_request: trinn.sensors.flipper.storage_pb2.MkdirRequest=..., storage_md5sum_request: trinn.sensors.flipper.storage_pb2.Md5sumRequest=..., storage_md5sum_response: trinn.sensors.flipper.storage_pb2.Md5sumResponse=..., storage_rename_request: trinn.sensors.flipper.storage_pb2.RenameRequest=..., storage_backup_create_request: trinn.sensors.flipper.storage_pb2.BackupCreateRequest=..., storage_backup_restore_request: trinn.sensors.flipper.storage_pb2.BackupRestoreRequest=..., app_start_request: trinn.sensors.flipper.application_pb2.StartRequest=..., app_lock_status_request: trinn.sensors.flipper.application_pb2.LockStatusRequest=..., app_lock_status_response: trinn.sensors.flipper.application_pb2.LockStatusResponse=..., app_exit_request: trinn.sensors.flipper.application_pb2.AppExitRequest=..., app_load_file_request: trinn.sensors.flipper.application_pb2.AppLoadFileRequest=..., app_button_press_request: trinn.sensors.flipper.application_pb2.AppButtonPressRequest=..., app_button_release_request: trinn.sensors.flipper.application_pb2.AppButtonReleaseRequest=..., gui_start_screen_stream_request: trinn.sensors.flipper.gui_pb2.StartScreenStreamRequest=..., gui_stop_screen_stream_request: trinn.sensors.flipper.gui_pb2.StopScreenStreamRequest=..., gui_screen_frame: trinn.sensors.flipper.gui_pb2.ScreenFrame=..., gui_send_input_event_request: trinn.sensors.flipper.gui_pb2.SendInputEventRequest=..., gui_start_virtual_display_request: trinn.sensors.flipper.gui_pb2.StartVirtualDisplayRequest=..., gui_stop_virtual_display_request: trinn.sensors.flipper.gui_pb2.StopVirtualDisplayRequest=..., gpio_set_pin_mode: trinn.sensors.flipper.gpio_pb2.SetPinMode=..., gpio_set_input_pull: trinn.sensors.flipper.gpio_pb2.SetInputPull=..., gpio_get_pin_mode: trinn.sensors.flipper.gpio_pb2.GetPinMode=..., gpio_get_pin_mode_response: trinn.sensors.flipper.gpio_pb2.GetPinModeResponse=..., gpio_read_pin: trinn.sensors.flipper.gpio_pb2.ReadPin=..., gpio_read_pin_response: trinn.sensors.flipper.gpio_pb2.ReadPinResponse=..., gpio_write_pin: trinn.sensors.flipper.gpio_pb2.WritePin=..., app_state_response: trinn.sensors.flipper.application_pb2.AppStateResponse=...) -> None: ...
-    def ClearField(self, field_name: Literal['command_id', 'command_status', 'has_next', 'empty', 'stop_session', 'system_ping_request', 'system_ping_response', 'system_reboot_request', 'system_device_info_request', 'system_device_info_response', 'system_factory_reset_request', 'system_get_datetime_request', 'system_get_datetime_response', 'system_set_datetime_request', 'system_play_audiovisual_alert_request', 'system_protobuf_version_request', 'system_protobuf_version_response', 'system_update_request', 'system_update_response', 'system_power_info_request', 'system_power_info_response', 'storage_info_request', 'storage_info_response', 'storage_stat_request', 'storage_stat_response', 'storage_list_request', 'storage_list_response', 'storage_read_request', 'storage_read_response', 'storage_write_request', 'storage_delete_request', 'storage_mkdir_request', 'storage_md5sum_request', 'storage_md5sum_response', 'storage_rename_request', 'storage_backup_create_request', 'storage_backup_restore_request', 'app_start_request', 'app_lock_status_request', 'app_lock_status_response', 'app_exit_request', 'app_load_file_request', 'app_button_press_request', 'app_button_release_request', 'gui_start_screen_stream_request', 'gui_stop_screen_stream_request', 'gui_screen_frame', 'gui_send_input_event_request', 'gui_start_virtual_display_request', 'gui_stop_virtual_display_request', 'gpio_set_pin_mode', 'gpio_set_input_pull', 'gpio_get_pin_mode', 'gpio_get_pin_mode_response', 'gpio_read_pin', 'gpio_read_pin_response', 'gpio_write_pin', 'app_state_response']) -> None: ...
+    def __init__(
+        self,
+        *,
+        command_id: int = ...,
+        command_status: CommandStatus = ...,
+        has_next: bool = ...,
+        empty: Empty = ...,
+        stop_session: StopSession = ...,
+        system_ping_request: trinn.sensors.flipper.system_pb2.PingRequest = ...,
+        system_ping_response: trinn.sensors.flipper.system_pb2.PingResponse = ...,
+        system_reboot_request: trinn.sensors.flipper.system_pb2.RebootRequest = ...,
+        system_device_info_request: trinn.sensors.flipper.system_pb2.DeviceInfoRequest = ...,
+        system_device_info_response: trinn.sensors.flipper.system_pb2.DeviceInfoResponse = ...,
+        system_factory_reset_request: trinn.sensors.flipper.system_pb2.FactoryResetRequest = ...,
+        system_get_datetime_request: trinn.sensors.flipper.system_pb2.GetDateTimeRequest = ...,
+        system_get_datetime_response: trinn.sensors.flipper.system_pb2.GetDateTimeResponse = ...,
+        system_set_datetime_request: trinn.sensors.flipper.system_pb2.SetDateTimeRequest = ...,
+        system_play_audiovisual_alert_request: trinn.sensors.flipper.system_pb2.PlayAudiovisualAlertRequest = ...,
+        system_protobuf_version_request: trinn.sensors.flipper.system_pb2.ProtobufVersionRequest = ...,
+        system_protobuf_version_response: trinn.sensors.flipper.system_pb2.ProtobufVersionResponse = ...,
+        system_update_request: trinn.sensors.flipper.system_pb2.UpdateRequest = ...,
+        system_update_response: trinn.sensors.flipper.system_pb2.UpdateResponse = ...,
+        system_power_info_request: trinn.sensors.flipper.system_pb2.PowerInfoRequest = ...,
+        system_power_info_response: trinn.sensors.flipper.system_pb2.PowerInfoResponse = ...,
+        storage_info_request: trinn.sensors.flipper.storage_pb2.InfoRequest = ...,
+        storage_info_response: trinn.sensors.flipper.storage_pb2.InfoResponse = ...,
+        storage_stat_request: trinn.sensors.flipper.storage_pb2.StatRequest = ...,
+        storage_stat_response: trinn.sensors.flipper.storage_pb2.StatResponse = ...,
+        storage_list_request: trinn.sensors.flipper.storage_pb2.ListRequest = ...,
+        storage_list_response: trinn.sensors.flipper.storage_pb2.ListResponse = ...,
+        storage_read_request: trinn.sensors.flipper.storage_pb2.ReadRequest = ...,
+        storage_read_response: trinn.sensors.flipper.storage_pb2.ReadResponse = ...,
+        storage_write_request: trinn.sensors.flipper.storage_pb2.WriteRequest = ...,
+        storage_delete_request: trinn.sensors.flipper.storage_pb2.DeleteRequest = ...,
+        storage_mkdir_request: trinn.sensors.flipper.storage_pb2.MkdirRequest = ...,
+        storage_md5sum_request: trinn.sensors.flipper.storage_pb2.Md5sumRequest = ...,
+        storage_md5sum_response: trinn.sensors.flipper.storage_pb2.Md5sumResponse = ...,
+        storage_rename_request: trinn.sensors.flipper.storage_pb2.RenameRequest = ...,
+        storage_backup_create_request: trinn.sensors.flipper.storage_pb2.BackupCreateRequest = ...,
+        storage_backup_restore_request: trinn.sensors.flipper.storage_pb2.BackupRestoreRequest = ...,
+        app_start_request: trinn.sensors.flipper.application_pb2.StartRequest = ...,
+        app_lock_status_request: trinn.sensors.flipper.application_pb2.LockStatusRequest = ...,
+        app_lock_status_response: trinn.sensors.flipper.application_pb2.LockStatusResponse = ...,
+        app_exit_request: trinn.sensors.flipper.application_pb2.AppExitRequest = ...,
+        app_load_file_request: trinn.sensors.flipper.application_pb2.AppLoadFileRequest = ...,
+        app_button_press_request: trinn.sensors.flipper.application_pb2.AppButtonPressRequest = ...,
+        app_button_release_request: trinn.sensors.flipper.application_pb2.AppButtonReleaseRequest = ...,
+        gui_start_screen_stream_request: trinn.sensors.flipper.gui_pb2.StartScreenStreamRequest = ...,
+        gui_stop_screen_stream_request: trinn.sensors.flipper.gui_pb2.StopScreenStreamRequest = ...,
+        gui_screen_frame: trinn.sensors.flipper.gui_pb2.ScreenFrame = ...,
+        gui_send_input_event_request: trinn.sensors.flipper.gui_pb2.SendInputEventRequest = ...,
+        gui_start_virtual_display_request: trinn.sensors.flipper.gui_pb2.StartVirtualDisplayRequest = ...,
+        gui_stop_virtual_display_request: trinn.sensors.flipper.gui_pb2.StopVirtualDisplayRequest = ...,
+        gpio_set_pin_mode: trinn.sensors.flipper.gpio_pb2.SetPinMode = ...,
+        gpio_set_input_pull: trinn.sensors.flipper.gpio_pb2.SetInputPull = ...,
+        gpio_get_pin_mode: trinn.sensors.flipper.gpio_pb2.GetPinMode = ...,
+        gpio_get_pin_mode_response: trinn.sensors.flipper.gpio_pb2.GetPinModeResponse = ...,
+        gpio_read_pin: trinn.sensors.flipper.gpio_pb2.ReadPin = ...,
+        gpio_read_pin_response: trinn.sensors.flipper.gpio_pb2.ReadPinResponse = ...,
+        gpio_write_pin: trinn.sensors.flipper.gpio_pb2.WritePin = ...,
+        app_state_response: trinn.sensors.flipper.application_pb2.AppStateResponse = ...,
+    ) -> None: ...
+    def ClearField(
+        self,
+        field_name: Literal[
+            "command_id",
+            "command_status",
+            "has_next",
+            "empty",
+            "stop_session",
+            "system_ping_request",
+            "system_ping_response",
+            "system_reboot_request",
+            "system_device_info_request",
+            "system_device_info_response",
+            "system_factory_reset_request",
+            "system_get_datetime_request",
+            "system_get_datetime_response",
+            "system_set_datetime_request",
+            "system_play_audiovisual_alert_request",
+            "system_protobuf_version_request",
+            "system_protobuf_version_response",
+            "system_update_request",
+            "system_update_response",
+            "system_power_info_request",
+            "system_power_info_response",
+            "storage_info_request",
+            "storage_info_response",
+            "storage_stat_request",
+            "storage_stat_response",
+            "storage_list_request",
+            "storage_list_response",
+            "storage_read_request",
+            "storage_read_response",
+            "storage_write_request",
+            "storage_delete_request",
+            "storage_mkdir_request",
+            "storage_md5sum_request",
+            "storage_md5sum_response",
+            "storage_rename_request",
+            "storage_backup_create_request",
+            "storage_backup_restore_request",
+            "app_start_request",
+            "app_lock_status_request",
+            "app_lock_status_response",
+            "app_exit_request",
+            "app_load_file_request",
+            "app_button_press_request",
+            "app_button_release_request",
+            "gui_start_screen_stream_request",
+            "gui_stop_screen_stream_request",
+            "gui_screen_frame",
+            "gui_send_input_event_request",
+            "gui_start_virtual_display_request",
+            "gui_stop_virtual_display_request",
+            "gpio_set_pin_mode",
+            "gpio_set_input_pull",
+            "gpio_get_pin_mode",
+            "gpio_get_pin_mode_response",
+            "gpio_read_pin",
+            "gpio_read_pin_response",
+            "gpio_write_pin",
+            "app_state_response",
+        ],
+    ) -> None: ...
 
 class Region(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -154,8 +278,8 @@ class Region(google.protobuf.message.Message):
     BANDS_FIELD_NUMBER: int
     country_code: bytes
     bands: Band
-    def __init__(self, *, country_code: bytes=..., bands: Band=...) -> None: ...
-    def ClearField(self, field_name: Literal['country_code', 'bands']) -> None: ...
+    def __init__(self, *, country_code: bytes = ..., bands: Band = ...) -> None: ...
+    def ClearField(self, field_name: Literal["country_code", "bands"]) -> None: ...
 
 class Band(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -167,8 +291,12 @@ class Band(google.protobuf.message.Message):
     end: int
     power_limit: int
     duty_cycle: int
-    def __init__(self, *, start: int=..., end: int=..., power_limit: int=..., duty_cycle: int=...) -> None: ...
-    def ClearField(self, field_name: Literal['start', 'end', 'power_limit', 'duty_cycle']) -> None: ...
+    def __init__(
+        self, *, start: int = ..., end: int = ..., power_limit: int = ..., duty_cycle: int = ...
+    ) -> None: ...
+    def ClearField(
+        self, field_name: Literal["start", "end", "power_limit", "duty_cycle"]
+    ) -> None: ...
 
 class CommandStatus(IntEnum):
     OK = 0
@@ -196,6 +324,7 @@ class CommandStatus(IntEnum):
     ERROR_VIRTUAL_DISPLAY_NOT_STARTED = 20
     ERROR_GPIO_MODE_INCORRECT = 58
     ERROR_GPIO_UNKNOWN_PIN_MODE = 59
+
 OK = CommandStatus.OK
 ERROR = CommandStatus.ERROR
 ERROR_DECODE = CommandStatus.ERROR_DECODE

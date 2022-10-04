@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import datetime
 import importlib
+import subprocess
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -24,16 +25,13 @@ TAB = " " * 4
 
 STUB_IMPORTS = [
     "from __future__ import annotations",
-    "",
     "from enum import IntEnum",
     "from typing import Literal",
-    "",
     "import google.protobuf.descriptor",
     "import google.protobuf.message",
     "import google.protobuf.symbol_database",
 ]
 GENERIC_GLOBALS = [
-    "",
     "DESCRIPTOR: google.protobuf.descriptor.FileDescriptor",
     "_sym_db: google.protobuf.symbol_database.SymbolDatabase",
 ]
@@ -83,14 +81,16 @@ class MetaProtobuf:
     def write(self):
         stub = self.src_file.parent / f"{self.src_file.stem}.pyi"
         stub.write_text(str(self) + "\n")
+        for post in ["isort", "black"]:
+            subprocess.run([post, str(stub)], check=True, capture_output=True)
         print(f"Generated {stub.relative_to(LIB_PATH)}", file=sys.stderr)
 
     def __str__(self) -> str:
         header_str = "\n".join(self.header)
-        commands = "\n\n".join([c.print() for c in self.commands])
-        enums = "\n\n".join([e.print() for e in self.enums])
+        commands = "\n".join([c.print() for c in self.commands])
+        enums = "\n".join([e.print() for e in self.enums])
 
-        return "\n\n".join([header_str, commands, enums])
+        return "\n".join([header_str, commands, enums])
 
 
 @dataclass(frozen=True, order=True)
@@ -135,7 +135,7 @@ class MetaMessage:
             init_str += ", *"
             for field in self.fields:
                 attrs.append(f"{TAB*(indent+1)}{field.upper()}_FIELD_NUMBER: int")
-                init_str += f", {field}: {self.fields[field]}=..."
+                init_str += f", {field}: {self.fields[field]} = ..."
         init_str += ") -> None: ..."
         attrs.extend([f"{TAB * (indent+1)}{f}: {t}" for f, t in self.fields.items()])
 
